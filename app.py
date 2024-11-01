@@ -5,15 +5,15 @@ import base64
 
 class InferlessPythonModel:
     def initialize(self):
-        self.pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-schnell", torch_dtype=torch.bfloat16).to("cuda")
+        self.pipe = FluxPipeline.from_pretrained("black-forest-labs/FLUX.1-dev", torch_dtype=torch.bfloat16).to("cuda")
 
     def infer(self, inputs):
         prompt = inputs["prompt"]
-        height = inputs.get("height", 512)
-        width = inputs.get("width", 512)
-        guidance_scale = inputs.get("guidance_scale", 7.5)
-        num_inference_steps = inputs.get("num_inference_steps", 4)
-        max_sequence_length = inputs.get("max_sequence_length", 256)
+        height = inputs.get("height", 1024)
+        width = inputs.get("width", 1024)
+        guidance_scale = inputs.get("guidance_scale", 3.5)
+        num_inference_steps = inputs.get("num_inference_steps", 25)
+        # max_sequence_length = inputs.get("max_sequence_length", 256)
 
         image = self.pipe(
             prompt,
@@ -21,7 +21,7 @@ class InferlessPythonModel:
             width=width,
             guidance_scale=guidance_scale,
             num_inference_steps=num_inference_steps,
-            max_sequence_length=max_sequence_length,
+            
         ).images[0]
 
         buff = BytesIO()
