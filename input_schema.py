@@ -28,11 +28,5 @@ INPUT_SCHEMA = {
         'required': False,
         'shape': [1],
         'example': [7.5]
-    },
-    "max_sequence_length": {
-        'datatype': 'INT16',
-        'required': False,
-        'shape': [1],
-        'example': [256]
     }
 }
